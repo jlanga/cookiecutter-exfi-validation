@@ -1,39 +1,62 @@
-# cookiecutter-smsk
+# exfi_validation: A Snakemake workflow to validate exfi's performance
 
-[![Build Status](https://travis-ci.org/jlanga/cookiecutter-smsk.svg?branch=master)](https://travis-ci.org/jlanga/cookiecutter-smsk)
+[![Build Status](https://travis-ci.org/jlanga/exfi_validation.svg?branch=master)](https://travis-ci.org/jlanga/exfi_validation)
 
-cookiecutter boilerplate for smsk
+## 1. Description
 
-# What's this?
+Workflow to:
 
-`cookiecutter-smsk` is a boilerplate folder hierarchy for snakemake. 
+<!---- Trim genomic reads (trimmomatic) -->
+- Find putative exons (exfi, abyss-bloom)
+<!---- Map agaist different exonic, transcriptomic and genomic references (bwa + samtools) -->
+- Make reports
 
-# Why?
+## 2. First steps
 
-It is a pain in the ass to start a snakemake workflow from scratch, so this boilerplate provides a 
-skeleton with a Snakefile, some sub-snakefiles, test data and some scripts that work, and from there, 
-modify it at your will.
+Follow the contents of the `.travis.yml` file:
 
-# How?
+0. Install (ana|mini)conda
 
-1. Install `miniconda` or the full Anaconda distribution.
+- [Anaconda](https://www.continuum.io/downloads)
 
-2. Install `snakemake`: `conda install -c bioconda snakemake`.
+- [miniconda](http://conda.pydata.org/miniconda.html)
+
+1. Install snakemake
+    ```sh
+    conda install snakemake
+    ```
+
+2. Execute the pipeline. Snakemake will take care of the dependencies:
+
+    ```sh
+    snakemake --use-conda -j 20
+    ```
+
+Once you know it works, edit the `config.yaml` with paths to your data
 
 
-3. Copy this template from GitHub:
+## 3. File organization
 
-`cookiecutter gh:jlanga/cookiecutter-smsk`
+The hierarchy of the folder is the one described in [A Quick Guide to Organizing Computational Biology Projects](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424):
 
-4. Fill the fields and you are set up.
+```
+smsk
+├── bin: your binaries, scripts, installation and virtualenv related files.
+├── data: raw data, hopefully links to backup data.
+├── README.md
+├── results: processed data.
+└── src: additional source code, tarballs, etc.
+```
 
-5. Enter in the created folder and type `snakemake --use-conda -j`. Snakemake will download the required packages through
-`conda` and will execute the workflow in parallel.
 
-# References
+## Bibliography
 
-- [Snakemake](http://snakemake.readthedocs.io/). The workflow engine that saved my life. Written in Python3.
-- [conda](https://conda.io/). The package manager. The best thing that has happened in Bioinformatics in years.
-- [bioconda](https://bioconda.github.io/). Where all the Bioinformatics is.
-- [cookiecutter](https://github.com/audreyr/cookiecutter). The command line utility that manages these kinds of templates.
-- [smsk](https://github.com/jlanga/smsk). The previous version of the template I was used until now.
+- [A Quick Guide to Organizing Computational Biology Projects](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424)
+
+- [Snakemake—a scalable bioinformatics workflow engine](http://bioinformatics.oxfordjournals.org/content/28/19/2520)
+
+- [biobloomtools]()
+
+- [abyss]()
+
+- [bedtools]()
