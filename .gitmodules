@@ -1,0 +1,3 @@
+[submodule "{{cookiecutter.repo_name}}"]
+	path = {{cookiecutter.repo_name}}
+	url = https://github.com/jlanga/exfi_validation
